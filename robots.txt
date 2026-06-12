@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thailand-nomad-tax.pages.dev/sitemap.xml

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thailand Tax Calculator for Remote Workers 2026 | Take-Home Pay & 180-Day Rule</title>
+  <meta name="description" content="Estimate your Thai tax as a remote worker or digital nomad: the 180-day residency rule, the remittance-based tax on foreign income, LTR visa exemption, and your real take-home pay." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://thailand-nomad-tax.pages.dev/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Thailand Remote Worker Tax Calculator — 180 Days & Remittance Rules" />
+  <meta property="og:description" content="How much Thai tax will you actually pay? Days, remittances, LTR — calculated in 60 seconds." />
+  <meta property="og:url" content="https://thailand-nomad-tax.pages.dev/" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Thailand Nomad Tax Calculator" />
+  <meta name="twitter:description" content="180-day rule + remittance tax + LTR exemption = your real take-home in Thailand." />
+
+  <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;🏝️&lt;/text&gt;&lt;/svg&gt;" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3121045082775003" crossorigin="anonymous"></script>
+
+  <!-- Google Analytics 4 : 측정ID 발급 후 교체 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Thailand Remote Worker Tax Calculator",
+    "url": "https://thailand-nomad-tax.pages.dev/",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "inLanguage": "en",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do digital nomads pay tax in Thailand?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Only if you become a Thai tax resident by spending 180+ days there in a calendar year. Residents are taxed on foreign income they bring into Thailand (remittance basis) at progressive rates of 0–35%. Stay under 180 days and your foreign income is outside the Thai tax net entirely." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is money I transfer to Thailand taxed?",
+        "acceptedAnswer": { "@type": "Answer", "text": "If you're a Thai tax resident, foreign-sourced income earned from 2024 onward is taxable in the year you remit it to Thailand — including bank transfers, ATM withdrawals and card spending. Pre-2024 savings remain exempt, and a pending amendment may exempt income remitted in the year earned or the following year." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the DTV (Destination Thailand Visa) come with tax benefits?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. The DTV has no special tax provisions — DTV holders who pass 180 days become ordinary tax residents. Only certain LTR visa categories (Wealthy Global Citizen, Wealthy Pensioner) are exempt from tax on remitted foreign income." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    * { font-family: 'Inter', sans-serif; }
+    .result-zero { background: linear-gradient(135deg, #1e3a5f 0%, #1d4ed8 55%, #38bdf8 130%); }
+    .result-tax { background: linear-gradient(135deg, #312e81 0%, #4338ca 55%, #f59e0b 140%); }
+    .amount-display { font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; }
+    .sel { width:100%; border:1px solid #e2e8f0; border-radius:12px; padding:11px 12px; font-size:14px; color:#0f172a; background:#f8fafc; transition:border-color .15s, box-shadow .15s; }
+    .sel:focus { outline:none; border-color:#4338ca; box-shadow:0 0 0 3px rgba(67,56,202,.1); }
+    .seg { display:flex; gap:8px; flex-wrap:wrap; }
+    .seg button { flex:1; min-width:100px; border:1px solid #e2e8f0; border-radius:12px; padding:11px 8px; font-size:13.5px; font-weight:600; color:#475569; background:#fff; cursor:pointer; transition:all .15s; }
+    .seg button:hover { border-color:#4338ca; }
+    .seg button.on { border-color:#4338ca; background:#eef2ff; color:#3730a3; }
+    .step-badge { width:24px; height:24px; background:#e0e7ff; color:#3730a3; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0; }
+    .adsense-slot { background:#f8fafc; border:1.5px dashed #cbd5e1; border-radius:12px; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:13px; letter-spacing:.05em; }
+    .affiliate-slot { background:#fffbeb; border:1.5px dashed #fbbf24; border-radius:12px; color:#b45309; font-size:13px; text-align:center; padding:14px; }
+    .acc { background:#fff; border:1px solid #f1f5f9; border-radius:16px; box-shadow:0 1px 2px rgba(0,0,0,.03); overflow:hidden; }
+    .acc > summary { list-style:none; cursor:pointer; padding:16px 20px; font-size:15px; font-weight:700; color:#0f172a; display:flex; align-items:center; justify-content:space-between; user-select:none; }
+    .acc > summary::-webkit-details-marker { display:none; }
+    .acc > summary .chev { width:18px; height:18px; color:#94a3b8; transition:transform .2s; flex-shrink:0; }
+    .acc[open] > summary .chev { transform:rotate(180deg); }
+    .acc > summary:hover { background:#f8fafc; }
+    .acc .acc-body { padding:0 20px 20px; }
+    .lbl { font-size:12px; font-weight:600; color:#64748b; display:block; margin-bottom:6px; }
+    #feedbackToggle { position:fixed; bottom:24px; right:0; z-index:50; writing-mode:vertical-rl; background:#4338ca; color:#fff; font-size:12px; font-weight:600; padding:12px 6px; border-radius:8px 0 0 8px; cursor:pointer; letter-spacing:.08em; box-shadow:-2px 2px 8px rgba(0,0,0,.15); }
+    #feedbackToggle:hover { background:#3730a3; }
+    #feedbackPanel { position:fixed; bottom:0; right:-360px; width:340px; max-height:85vh; background:#fff; border-radius:16px 0 0 0; box-shadow:-4px 0 24px rgba(0,0,0,.12); z-index:49; transition:right .3s; overflow-y:auto; padding:20px; }
+    #feedbackPanel.open { right:0; }
+    .fb-input { width:100%; border:1px solid #e2e8f0; border-radius:10px; padding:10px 12px; font-size:13px; background:#f8fafc; }
+    .fb-input:focus { outline:none; border-color:#4338ca; }
+    .fb-btn { width:100%; background:#4338ca; color:#fff; font-size:13px; font-weight:600; padding:10px; border-radius:10px; border:none; cursor:pointer; margin-top:10px; }
+    .fb-btn:disabled { background:#a5b4fc; }
+    #fbSuccess { display:none; text-align:center; color:#4338ca; font-size:13px; margin-top:8px; }
+  </style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+
+  <!-- AdSense Space: TOP -->
+  <div class="w-full max-w-2xl mx-auto px-4 pt-5">
+    <!-- AdSense Space -->
+    <div class="adsense-slot h-20 mb-2">Ad Space (728×90)</div>
+  </div>
+
+  <main class="w-full max-w-2xl mx-auto px-4 py-6">
+
+    <div class="mb-7">
+      <div class="inline-flex items-center gap-2 bg-indigo-50 text-indigo-800 text-xs font-medium px-3 py-1 rounded-full mb-3">
+        🏝️ 180-day rule · remittance basis (Por. 161/2566) · <span id="badgeYear"></span>
+      </div>
+      <h1 class="text-2xl font-bold text-slate-900 leading-tight">Thailand Tax Calculator<br class="sm:hidden"/> for Remote Workers</h1>
+      <p class="text-sm text-slate-500 mt-2">Working remotely from Thailand on foreign income? Your Thai tax depends on three things — days, remittances, and your visa. Calculate your real take-home.</p>
+    </div>
+
+    <div class="bg-blue-50 border border-blue-100 rounded-2xl p-4 mb-4">
+      <p class="text-xs text-blue-800 leading-relaxed"><strong>Pending change:</strong> Thailand has proposed exempting foreign income remitted in the year it's earned or the following year (expected from the 2026 tax year, not yet formally enacted). This calculator reflects the rules currently in force and will be updated when the amendment passes.</p>
+    </div>
+
+    <!-- Input -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 mb-4 space-y-7">
+
+      <div>
+        <div class="flex items-center gap-2 mb-3"><div class="step-badge">1</div><span class="text-sm font-semibold text-slate-700">Days in Thailand this calendar year</span></div>
+        <input id="days" type="number" inputmode="numeric" min="0" max="366" placeholder="e.g. 240" class="sel text-base" />
+        <p class="text-xs text-slate-400 mt-1.5">180+ days = Thai tax resident. Entry and exit days both count; days are cumulative, not consecutive.</p>
+      </div>
+
+      <div>
+        <div class="flex items-center gap-2 mb-3"><div class="step-badge">2</div><span class="text-sm font-semibold text-slate-700">Annual remote-work income (USD, foreign-sourced)</span></div>
+        <input id="income" type="number" inputmode="numeric" min="0" step="1000" placeholder="e.g. 60000" class="sel text-base" />
+      </div>
+
+      <div>
+        <div class="flex items-center gap-2 mb-3"><div class="step-badge">3</div><span class="text-sm font-semibold text-slate-700">How much of it do you bring into Thailand per year?</span></div>
+        <div class="seg" id="remitSeg">
+          <button data-v="25">~25%</button>
+          <button data-v="50" class="on">~50%</button>
+          <button data-v="75">~75%</button>
+          <button data-v="100">All of it</button>
+        </div>
+        <p class="text-xs text-slate-400 mt-1.5">Remittance = bank transfers + ATM withdrawals + card spending in Thailand. Only remitted income is taxed.</p>
+      </div>
+
+      <div>
+        <div class="flex items-center gap-2 mb-3"><div class="step-badge">4</div><span class="text-sm font-semibold text-slate-700">Your visa situation</span></div>
+        <div class="seg" id="visaSeg">
+          <button data-v="normal" class="on">DTV / tourist / other</button>
+          <button data-v="ltr">LTR — Wealthy Global Citizen / Pensioner</button>
+        </div>
+        <p class="text-xs text-slate-400 mt-1.5">Only these LTR categories are exempt from tax on remitted foreign income. The DTV has no tax benefits.</p>
+      </div>
+
+      <div>
+        <div class="flex items-center gap-2 mb-3"><div class="step-badge">5</div><span class="text-sm font-semibold text-slate-700">USD→THB rate for the estimate</span></div>
+        <input id="fx" type="number" inputmode="decimal" min="20" max="50" step="0.5" value="36" class="sel" />
+        <p class="text-xs text-slate-400 mt-1.5">Approximate rate is fine — adjust to today's rate for a tighter estimate.</p>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div id="resultCard" class="rounded-2xl p-6 mb-4 opacity-0 transition-opacity duration-300">
+      <p class="text-white/80 text-sm font-medium mb-1">Your estimated Thai tax</p>
+      <div class="flex items-end gap-2">
+        <span id="resultStatus" class="amount-display text-white text-3xl font-extrabold leading-none">—</span>
+      </div>
+      <p id="resultSub" class="text-white/85 text-xs mt-3"></p>
+    </div>
+
+    <!-- Breakdown -->
+    <div id="infoCard" class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 mb-4 hidden">
+      <h2 class="text-sm font-semibold text-slate-700 mb-3">Breakdown</h2>
+      <div class="space-y-2 text-sm" id="infoBody"></div>
+    </div>
+
+    <!-- Affiliate: 2분기 -->
+    <div id="affZero" class="affiliate-slot mb-4 hidden">
+      <!-- AFFILIATE_ZERO_START -->
+      <p class="font-semibold mb-1">✈️ Your foreign income stays outside the Thai tax net</p>
+      <p class="text-xs">Keep the evidence that makes it stick: entry/exit records, income source documents, pre-2024 savings statements. Planning a longer stay or an LTR application? [Affiliate link: Thailand visa & relocation specialist]</p>
+      <!-- AFFILIATE_ZERO_END -->
+    </div>
+    <div id="affTax" class="affiliate-slot mb-4 hidden">
+      <!-- AFFILIATE_TAX_START -->
+      <p class="font-semibold mb-1">🧾 You likely have a Thai filing obligation</p>
+      <p class="text-xs">A Thai tax accountant (typically ฿5,000–20,000/year) can apply your double-tax treaty, separate pre-2024 savings, structure remittances legally — and usually saves more than they cost. [Affiliate link: English-speaking Thai tax adviser]</p>
+      <!-- AFFILIATE_TAX_END -->
+    </div>
+
+    <!-- Notes -->
+    <div class="bg-amber-50 border border-amber-100 rounded-2xl p-5 mb-4">
+      <h2 class="text-sm font-semibold text-amber-800 mb-2">Before you rely on this result</h2>
+      <ul class="text-xs text-amber-700 space-y-1.5 leading-relaxed list-disc pl-4">
+        <li>This estimates Thai personal income tax on <strong>remitted foreign income</strong> using standard deductions (฿60,000 personal allowance + 50% expense deduction capped at ฿100,000). Your home-country tax is separate.</li>
+        <li>Double Taxation Agreements (Thailand has 61) can reduce or eliminate Thai tax on specific income types — credit for tax already paid abroad is commonly available.</li>
+        <li>Income earned before 2024 and savings remitted from it remain exempt — documentation is everything.</li>
+        <li>Working from Thailand for a foreign employer sits in a gray zone on income "source" — most practitioners treat it as foreign-sourced, but get advice for your facts.</li>
+      </ul>
+    </div>
+
+    <!-- Explanatory content -->
+    <article class="space-y-3">
+
+      <details class="acc" open>
+        <summary>The three levers: days, remittances, visa<svg class="chev" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="acc-body">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
+            <div class="bg-blue-50 rounded-xl p-4">
+              <h3 class="text-sm font-semibold text-blue-900 mb-1">1. Days (180 rule)</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">Under 180 days in the calendar year = non-resident = foreign income untouchable by Thai tax, no matter how much you remit.</p>
+            </div>
+            <div class="bg-indigo-50 rounded-xl p-4">
+              <h3 class="text-sm font-semibold text-indigo-900 mb-1">2. Remittances</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">Residents are taxed only on foreign income <em>brought in</em> — transfers, ATM, card spending. What stays offshore isn't taxed (yet).</p>
+            </div>
+            <div class="bg-amber-50 rounded-xl p-4">
+              <h3 class="text-sm font-semibold text-amber-800 mb-1">3. Visa (LTR)</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">LTR Wealthy Global Citizen / Wealthy Pensioner categories: remitted foreign income fully exempt. DTV: no tax perks at all.</p>
+            </div>
+          </div>
+          <p class="text-sm text-slate-600 leading-relaxed">Since 1 January 2024 (Departmental Instruction Por. 161/2566), the old trick of waiting until the next calendar year to remit income tax-free is gone — income earned from 2024 onward is taxable whenever you bring it in, if you were a resident in the year you earned it.</p>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Thai progressive tax rates<svg class="chev" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="acc-body">
+          <div class="overflow-x-auto">
+            <table class="text-xs text-slate-600 w-full border-collapse">
+              <thead><tr class="bg-slate-50 text-slate-700"><th class="p-2 text-left font-semibold">Taxable income (THB/yr)</th><th class="p-2 text-left">Rate</th></tr></thead>
+              <tbody>
+                <tr class="border-b border-slate-50"><td class="p-2">0 – 150,000</td><td class="p-2">0%</td></tr>
+                <tr class="border-b border-slate-50"><td class="p-2">150,001 – 300,000</td><td class="p-2">5%</td></tr>
+                <tr class="border-b border-slate-50"><td class="p-2">300,001 – 500,000</td><td class="p-2">10%</td></tr>
+                <tr class="border-b border-slate-50"><td class="p-2">500,001 – 750,000</td><td class="p-2">15%</td></tr>
+                <tr class="border-b border-slate-50"><td class="p-2">750,001 – 1,000,000</td><td class="p-2">20%</td></tr>
+                <tr class="border-b border-slate-50"><td class="p-2">1,000,001 – 2,000,000</td><td class="p-2">25%</td></tr>
+                <tr class="border-b border-slate-50"><td class="p-2">2,000,001 – 4,000,000</td><td class="p-2">30%</td></tr>
+                <tr><td class="p-2">4,000,001+</td><td class="p-2">35%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-slate-500 leading-relaxed mt-3">Applied after deductions (this tool uses the ฿60,000 personal allowance + employment expense deduction of 50% capped at ฿100,000). Additional allowances (spouse, children, insurance, retirement funds) can lower it further.</p>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Living cost reality check<svg class="chev" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="acc-body">
+          <p class="text-sm text-slate-600 leading-relaxed mb-3">The tax math is only half the picture — purchasing power is the other half. Typical comfortable monthly budgets (single person, 2026 ballpark):</p>
+          <ul class="text-sm text-slate-600 leading-relaxed space-y-1.5 list-disc pl-5 mb-3">
+            <li><strong>Chiang Mai:</strong> $1,000–1,500 — modern condo, eating out daily, coworking</li>
+            <li><strong>Bangkok:</strong> $1,500–2,500 — central condo with pool/gym, mixed local & western lifestyle</li>
+            <li><strong>Phuket / islands:</strong> $1,800–3,000 — beach premium on rent and western food</li>
+          </ul>
+          <p class="text-sm text-slate-600 leading-relaxed">Rule of thumb: a $50–60k remote salary after Thai tax typically funds a lifestyle that would take roughly double that in a major US or Western European city. That arbitrage — not the beaches — is why Thailand keeps topping nomad rankings.</p>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Frequently asked questions<svg class="chev" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="acc-body">
+          <div class="space-y-4">
+            <div><h3 class="text-sm font-semibold text-slate-800 mb-1">Q. I keep my salary in a US account and only withdraw from ATMs. Taxed?</h3><p class="text-sm text-slate-600 leading-relaxed">A. ATM withdrawals and card spending in Thailand count as remittances. If you're a resident and the money is post-2023 income, it's assessable when it lands.</p></div>
+            <div><h3 class="text-sm font-semibold text-slate-800 mb-1">Q. What about my savings from before 2024?</h3><p class="text-sm text-slate-600 leading-relaxed">A. Income earned before 1 January 2024 stays exempt when remitted — but you carry the burden of proof. Keep a year-end 2023 statement as your baseline; remittances traced to that pot are tax-free.</p></div>
+            <div><h3 class="text-sm font-semibold text-slate-800 mb-1">Q. I already pay tax in my home country. Double taxed?</h3><p class="text-sm text-slate-600 leading-relaxed">A. Usually not in full — Thailand's 61 DTAs generally give credit for foreign tax paid, and some income types (certain government pensions) are taxable only at source. The credit doesn't apply itself though; it's claimed in your Thai filing.</p></div>
+            <div><h3 class="text-sm font-semibold text-slate-800 mb-1">Q. When and how do I file?</h3><p class="text-sm text-slate-600 leading-relaxed">A. Thai tax year = calendar year; personal returns (PND 90/91) are due by 31 March of the following year (early April if e-filing). You'll need a Thai tax ID number first.</p></div>
+            <div><h3 class="text-sm font-semibold text-slate-800 mb-1">Q. Will the pending exemption change this calculator?</h3><p class="text-sm text-slate-600 leading-relaxed">A. If enacted as proposed, income remitted in the year earned or the next year would become exempt — which would zero out the tax for most active remote workers. We monitor this monthly and will update the day it's law.</p></div>
+          </div>
+        </div>
+      </details>
+
+      <p class="text-xs text-slate-400 leading-relaxed px-2 pt-1">
+        Sources: Thai Revenue Department (Departmental Instruction Por. 161/2566), Revenue Code progressive rate schedule, public LTR program terms. This calculator provides a simplified estimate only and is not tax advice — actual liability depends on income classification, deductions, DTA relief and documentation. Consult a Thai tax professional before relying on any figure.
+      </p>
+
+    </article>
+
+  </main>
+
+  <!-- AdSense Space: BOTTOM -->
+  <div class="w-full max-w-2xl mx-auto px-4 pb-8">
+    <!-- AdSense Space -->
+    <div class="adsense-slot h-24">Ad Space (336×280)</div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="w-full max-w-2xl mx-auto px-4 pb-16">
+    <div class="space-y-3">
+      <details class="acc">
+        <summary>Privacy Policy<svg class="chev" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="acc-body text-xs text-slate-500 leading-relaxed space-y-2">
+          <p>This site uses Google Analytics to understand how visitors use the calculator. Google Analytics collects anonymous traffic data using cookies. No personally identifiable information is collected. You can disable cookies in your browser settings.</p>
+          <p>This site displays ads served by third-party advertising networks (including Google AdSense). Ad providers may use cookies to show ads based on your interests. You can manage ad personalisation through Google's Ads Settings.</p>
+          <p>All values you enter are processed entirely in your browser. Nothing you type is transmitted to or stored on any server.</p>
+          <p>Messages sent through the "Report an issue" form are used solely to improve this site.</p>
+        </div>
+      </details>
+      <details class="acc">
+        <summary>Disclaimer<svg class="chev" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="acc-body text-xs text-slate-500 leading-relaxed space-y-2">
+          <p>This calculator provides a simplified estimate of Thai personal income tax on remitted foreign income. It is for informational purposes only and does not constitute tax, legal, or immigration advice.</p>
+          <p>It does not model all deductions, DTA relief, income classifications, or pending legislative changes. The Thai Revenue Code and official guidance govern.</p>
+          <p>Some links on this site may be affiliate links. If you use them, we may earn a commission at no extra cost to you. This never affects the results.</p>
+          <p>The operator of this site accepts no liability for decisions made based on the information provided here.</p>
+        </div>
+      </details>
+      <details class="acc">
+        <summary>About / Contact<svg class="chev" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="acc-body text-xs text-slate-500 leading-relaxed space-y-2">
+          <p>This is an independent, individually-operated tool built to answer the question every Thailand-based remote worker asks: "what will I actually pay?" — days, remittances, and visa, in one calculation.</p>
+          <p>Found an error or have a suggestion? Use the "Report an issue" button on the right edge of the screen.</p>
+        </div>
+      </details>
+      <p class="text-center text-xs text-slate-400 pt-2">© <span id="footerYear"></span> Thailand Remote Worker Tax Calculator</p>
+    </div>
+  </footer>
+
+  <div id="feedbackToggle" onclick="toggleFeedback()">Report an issue</div>
+  <div id="feedbackPanel">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-sm font-bold text-slate-800">Report an issue</h3>
+      <button onclick="toggleFeedback()" class="text-slate-400 hover:text-slate-600 text-lg leading-none">✕</button>
+    </div>
+    <p class="text-xs text-slate-500 mb-4">Spotted an error or a rule change (e.g. the pending exemption passing)? Every report is reviewed.</p>
+    <div class="mb-3"><label class="lbl">Type</label>
+      <select id="fbType" class="fb-input">
+        <option value="rule-change">A Thai tax rule has changed</option>
+        <option value="calculation">Result seems wrong</option>
+        <option value="wording">Wording unclear</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div class="mb-3"><label class="lbl">Details (optional)</label><textarea id="fbText" class="fb-input" rows="4"></textarea></div>
+    <div class="mb-3"><label class="lbl">Email (if you'd like a reply)</label><input id="fbEmail" type="email" class="fb-input" /></div>
+    <button class="fb-btn" id="fbSubmitBtn" onclick="submitFeedback()">Send</button>
+    <div id="fbSuccess">✓ Sent. Thank you.</div>
+  </div>
+
+  <script>
+  /* CONFIG_START */
+  const POLICY_CONFIG = {
+    "residencyDays": 180,
+    "personalAllowanceTHB": 60000,
+    "expenseDeductionRate": 0.5,
+    "expenseDeductionCapTHB": 100000,
+    "defaultFx": 36,
+    "brackets": [
+      { "upTo": 150000,  "rate": 0.00 },
+      { "upTo": 300000,  "rate": 0.05 },
+      { "upTo": 500000,  "rate": 0.10 },
+      { "upTo": 750000,  "rate": 0.15 },
+      { "upTo": 1000000, "rate": 0.20 },
+      { "upTo": 2000000, "rate": 0.25 },
+      { "upTo": 4000000, "rate": 0.30 },
+      { "upTo": null,    "rate": 0.35 }
+    ]
+  };
+  /* CONFIG_END */
+
+  const NOW_YEAR = new Date().getFullYear();
+  document.getElementById('badgeYear').textContent = NOW_YEAR;
+  document.getElementById('footerYear').textContent = NOW_YEAR;
+
+  const state = { remit: 50, visa: 'normal' };
+  function bindSeg(id, key, parse) {
+    document.getElementById(id).querySelectorAll('button').forEach(b => {
+      b.addEventListener('click', () => {
+        document.getElementById(id).querySelectorAll('button').forEach(x=>x.classList.remove('on'));
+        b.classList.add('on');
+        state[key] = parse ? parseInt(b.dataset.v, 10) : b.dataset.v;
+        calculate();
+      });
+    });
+  }
+  bindSeg('remitSeg','remit', true);
+  bindSeg('visaSeg','visa', false);
+  ['days','income','fx'].forEach(id => document.getElementById(id).addEventListener('input', calculate));
+
+  function thaiTax(taxableTHB) {
+    let tax = 0, prev = 0;
+    for (const b of POLICY_CONFIG.brackets) {
+      const cap = b.upTo === null ? Infinity : b.upTo;
+      if (taxableTHB > prev) tax += (Math.min(taxableTHB, cap) - prev) * b.rate;
+      prev = cap;
+      if (taxableTHB <= cap) break;
+    }
+    return tax;
+  }
+
+  function calculate() {
+    const cfg = POLICY_CONFIG;
+    const days = parseInt(document.getElementById('days').value, 10);
+    const income = parseFloat(document.getElementById('income').value);
+    const fx = parseFloat(document.getElementById('fx').value) || cfg.defaultFx;
+    const resultCard = document.getElementById('resultCard');
+    const infoCard = document.getElementById('infoCard');
+
+    if (isNaN(days) || isNaN(income) || income <= 0) {
+      resultCard.style.opacity = '0';
+      infoCard.classList.add('hidden');
+      ['affZero','affTax'].forEach(id => document.getElementById(id).classList.add('hidden'));
+      return;
+    }
+
+    const isResident = days >= cfg.residencyDays;
+    const isLTR = state.visa === 'ltr';
+    const remittedUSD = income * state.remit / 100;
+    const remittedTHB = remittedUSD * fx;
+
+    let taxTHB = 0, taxableTHB = 0, reason = '';
+    if (!isResident) {
+      reason = `${days} days < 180 — you are NOT a Thai tax resident this year. Foreign-sourced income is outside the Thai tax net entirely, remitted or not.`;
+    } else if (isLTR) {
+      reason = `Thai tax resident (${days} days), but your LTR category exempts remitted foreign income from Thai tax.`;
+    } else {
+      const expenseDed = Math.min(remittedTHB * cfg.expenseDeductionRate, cfg.expenseDeductionCapTHB);
+      taxableTHB = Math.max(remittedTHB - expenseDed - cfg.personalAllowanceTHB, 0);
+      taxTHB = thaiTax(taxableTHB);
+      reason = `Thai tax resident (${days} days). Tax applies to the ฿${Math.round(remittedTHB).toLocaleString()} you remit, after standard deductions.`;
+    }
+
+    const taxUSD = taxTHB / fx;
+    const netUSD = income - taxUSD;
+    const effOnIncome = taxUSD / income * 100;
+
+    resultCard.style.opacity = '1';
+    resultCard.className = resultCard.className.replace(/result-(zero|tax)/g,'').trim()
+      + ' ' + (taxTHB === 0 ? 'result-zero' : 'result-tax');
+    document.getElementById('resultStatus').textContent =
+      taxTHB === 0 ? 'Thai tax: $0' : `Thai tax ≈ $${Math.round(taxUSD).toLocaleString()} / yr`;
+    document.getElementById('resultSub').textContent = reason;
+
+    infoCard.classList.remove('hidden');
+    const row = (l, v, strong=false) => `
+      <div class="flex justify-between py-1.5 border-b border-slate-50 gap-3">
+        <span class="text-slate-500">${l}</span>
+        <span class="${strong?'font-bold':'font-medium'} text-slate-800 text-right amount-display">${v}</span>
+      </div>`;
+    document.getElementById('infoBody').innerHTML =
+      row('Residency', isResident ? `Resident (${days} days ≥ 180)` : `Non-resident (${days} days)`)
+      + row('Remitted to Thailand', `$${Math.round(remittedUSD).toLocaleString()} (≈ ฿${Math.round(remittedTHB).toLocaleString()})`)
+      + (taxTHB > 0 ? row('Taxable after deductions', `฿${Math.round(taxableTHB).toLocaleString()}`) : '')
+      + row('Thai tax', taxTHB === 0 ? '฿0' : `฿${Math.round(taxTHB).toLocaleString()} (≈ $${Math.round(taxUSD).toLocaleString()})`)
+      + row('Effective rate on total income', `${effOnIncome.toFixed(1)}%`)
+      + `<div class="flex justify-between py-2 mt-1 bg-indigo-50 rounded-lg px-3">
+          <span class="text-indigo-800 font-semibold">Take-home after Thai tax</span>
+          <span class="font-bold text-indigo-800 amount-display">$${Math.round(netUSD).toLocaleString()} / yr · $${Math.round(netUSD/12).toLocaleString()} / mo</span>
+        </div>`;
+
+    document.getElementById('affZero').classList.toggle('hidden', taxTHB !== 0);
+    document.getElementById('affTax').classList.toggle('hidden', taxTHB === 0);
+
+    if (typeof gtag === 'function') {
+      clearTimeout(window._gaTimer);
+      window._gaTimer = setTimeout(() => {
+        gtag('event', 'calc_done', { result: taxTHB === 0 ? 'zero' : 'taxed', resident: isResident });
+      }, 1500);
+    }
+  }
+
+  function toggleFeedback(){ document.getElementById('feedbackPanel').classList.toggle('open'); }
+  async function submitFeedback(){
+    const type=document.getElementById('fbType').value, text=document.getElementById('fbText').value.trim(), email=document.getElementById('fbEmail').value.trim();
+    const btn=document.getElementById('fbSubmitBtn'); btn.disabled=true; btn.textContent='Sending...';
+    try {
+      const res = await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({access_key:"00f488d8-a296-4b0e-bfa6-a5eacdc5d5e6",subject:`[TH Nomad Tax] ${type}`,from_name:"Thailand Nomad Tax Calculator",email:email||"no-reply@feedback.local",message:`Type: ${type}\n\n${text||"(none)"}\n\nFrom: ${location.href}`})});
+      const data = await res.json();
+      if (data.success){ document.getElementById('fbSuccess').style.display='block'; btn.textContent='Sent'; }
+      else { btn.disabled=false; btn.textContent='Send'; alert("Sending failed. Please try again."); }
+    } catch(e){ btn.disabled=false; btn.textContent='Send'; alert("A network error occurred."); }
+  }
+  </script>
+</body>
+</html>
